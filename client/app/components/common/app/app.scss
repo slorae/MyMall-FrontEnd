@@ -1,0 +1,143 @@
+/*设置滚动条的样式 */
+::-webkit-scrollbar {
+   width: 13px;
+   height: 8px;
+ }
+
+ ::-webkit-scrollbar-track {
+   background: transparent;
+ }
+
+ ::-webkit-scrollbar-thumb {
+   border-radius: 8px;
+   width: 5px;
+   height: 5px;
+   background-color: #bbb;
+   background-clip: padding-box;
+   border-right: 3px solid transparent;
+   border-left: 4px solid transparent;
+   border-top: 3px solid transparent;
+ }
+
+::-webkit-scrollbar-thumb:hover {
+   background-color: #888;
+ }
+
+// 设置 app 样式
+$basic-backgroud-color: rgb(246,246,246);
+body{
+  background-color: $basic-backgroud-color;
+  min-width: 750px;
+}
+.app{
+  background-color: $basic-backgroud-color;
+  .top{
+    height: 70px;
+    width: 100%;
+    // border-top: 1px solid red;
+  }
+  .content{
+    md-content{
+      background-color: $basic-backgroud-color;
+    }
+    background-color: $basic-backgroud-color;
+    width: 100%;
+  }
+}
+
+// 表格
+.global-table{
+    width: 95%;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(235, 242, 224);
+    border-bottom-style: solid;
+    thead, tr {
+        border-top: 1px solid rgb(235, 242, 224);
+        border-left: 1px solid rgb(235, 242, 224);
+        border-right: 1px solid rgb(235, 242, 224);
+    }
+    td, th{
+        padding: 10px 15px;
+    }
+    thead{
+        color: #FFF;
+        background-color: #E0D3BF;
+        th{
+          font-size: 16px;
+        }
+    }
+    tbody  {
+        color: #000;
+        tr{
+          outline: none;
+          background: #FFF;
+          &:hover{
+            background: rgb(250,250,250);
+          }
+        }
+        tr:nth-child(even){
+            // background: rgb(250,250,250);
+        }
+        tr:nth-child(odd) {
+        }
+    }
+}
+// 表格空行
+.placeholder{
+    height: 120px;
+    width: 95%;
+    margin: 0 auto;
+    border: 1px #e4e7ed dashed;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 120px;
+    border-radius: 5px;
+    background: #fbfcfc;
+    color: #ccd1d9;
+}
+
+// 分页
+.pagination-container{
+  margin: 0 auto;
+  width: 350px;
+  .pagination {
+    ul{
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    a{
+      text-decoration: none;
+      display: inline-block;
+      padding: 10px 18px;
+      color: #222;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      padding: 0;
+      text-align: center;
+      cursor:pointer;
+    }
+    a.is-active{
+      background-color: #E0D3BF;
+      border-radius: 100%;
+      color: #fff;
+      li{
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+md-toast{
+  position: fixed;
+}
+// 通知框
+.toast-dialog{
+  right: 39% !important;
+}
+
+.count-number{
+  margin: 8px;
+  margin-left: 40px;
+}

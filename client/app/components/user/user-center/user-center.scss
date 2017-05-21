@@ -1,0 +1,110 @@
+.user-center{
+  $user-center-width: 700px;
+  .basic{
+    width: $user-center-width;
+    height: 135px;
+    margin: 0 auto;
+    text-align: center;
+    .avatar-container{
+      width: 80px;
+      margin: 0 auto;
+      img{
+        height: 80px;
+        width: 80px;
+        margin: 0 auto;
+        border-radius: 50%;
+        box-sizing: content-box;
+      }
+    }
+    .info{
+      .name{
+        margin: 6px 0;
+        font-size: 22px;
+      }
+      .other{
+        margin: 0;
+      }
+    }
+
+  }
+  .detail{
+    width: $user-center-width;
+    md-tabs{
+      outline: none;
+    }
+    margin: 0 auto;
+    .addresses-list{
+        width: 600px;
+        margin: 10px;
+        .add-address{
+          margin-left: 15px;
+          margin-top: 20px;
+        }
+        .address{
+          outline: none;
+          position: relative;
+          display: inline-block;
+          width: 282px;
+          height: 96px;
+          overflow: hidden;
+          border: 1px solid #e4e7ed;
+          margin: 5px;
+          padding: 8px;
+          font-size: 12px;
+          cursor: pointer;
+          .detail{
+            height: 30px;
+            width: 100%;
+            overflow: hidden;
+          }
+          span{
+            position: absolute;
+            top: 4px;
+            right: 4px;
+          }
+        }
+        .selected {
+          outline: #3890ff solid 2px;
+          background-color: rgba(158,158,158,0.2);
+        }
+      }
+    .navBardemoBasicUsage md-content .ext-content {
+      padding: 50px;
+      margin: 20px;
+    }
+    .action-buttons{
+      text-align: left;
+      padding-bottom: 10px;
+      padding-left: 30px;
+    }
+    .order-list{
+      height: 300px;
+      margin: 6px;
+      .md-list-item-text{
+        outline: none;
+        margin: 0;
+        position: relative;
+        .order-detail{
+          outline: none;
+          width: 100%;
+          overflow: hidden;
+          .order-address{
+            outline: none;
+            margin-left: 10px;
+            margin-top: 4px;
+          }
+        }
+        .order-time{
+          outline: none;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+
+  .changePassword{
+    animation: all 0.1s;
+  }
+}

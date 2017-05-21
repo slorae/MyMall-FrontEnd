@@ -1,0 +1,73 @@
+{
+  "name": "bookstore",
+  "version": "0.0.1",
+  "description": "BookStore",
+  "dependencies": {
+    "angular": "1.6.4",
+    "angular-animate": "1.6.4",
+    "angular-aria": "1.6.4",
+    "angular-chart.js": "^1.1.1",
+    "angular-file-upload": "^2.5.0",
+    "angular-material": "1.1.4",
+    "angular-messages": "1.6.4",
+    "angular-mocks": "1.5.7",
+    "angular-trix": "^1.0.2",
+    "angular-ui-router": "^0.3.1",
+    "bootstrap-css-only": "3.3.6",
+    "chart.js": "^2.5.0",
+    "lodash": "^4.13.1",
+    "moment": "^2.18.1",
+    "normalize.css": "4.1.1",
+    "ui-router": "^1.0.0-alpha.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.5.7",
+    "babel-core": "6.10.4",
+    "babel-eslint": "^6.1.0",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "browser-sync": "2.13.0",
+    "css-loader": "0.23.1",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-flowtype": "^2.2.7",
+    "eslint-plugin-import": "^1.9.2",
+    "file-loader": "0.9.0",
+    "flowtype": "^2.0.0",
+    "fs-walk": "0.0.1",
+    "gulp": "3.9.1",
+    "gulp-notify": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "1.2.2",
+    "gulp-template": "4.0.0",
+    "gulp-uglify": "^3.0.0",
+    "ng-annotate-loader": "0.1.0",
+    "node-libs-browser": "1.0.0",
+    "node-sass": "^3.3.3",
+    "phantomjs-prebuilt": "2.1.7",
+    "raw-loader": "0.5.1",
+    "run-sequence": "1.2.1",
+    "sass-loader": "^3.0.0",
+    "style-loader": "0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "2.1.1",
+    "url-loader": "0.5.7",
+    "webpack": "1.13.1",
+    "webpack-stream": "3.2.0",
+    "yargs": "4.7.1"
+  },
+  "scripts": {
+    "start": "gulp"
+  },
+  "keywords": [
+    "angular",
+    "webpack",
+    "es6"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simpulton/eggly-es6.git"
+  },
+  "author": "olive",
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,59 @@
+<div class="admin-admins">
+  <h3>管理员管理</h3>
+  <table class="global-table admin-admins-table">
+    <thead>
+         <tr>
+            <th>账户类型</th>
+            <th>登录账号</th>
+            <th>姓名</th>
+            <th>注册时间</th>
+            <th>最近活跃</th>
+            <th>操作</th>
+         </tr> 
+     </thead>
+     <tbody>
+         <tr ng-repeat="user in vm.data.admins" ng-dblclick="vm.editAdmin(user)">
+            <td>管理员</td>
+            <td>{{user.account}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.create_at | dateFilter}}</td>
+            <td>{{user.active_at | dateFilter}}</td>
+            <td>
+              <md-button ng-disabled="vm.data.admins.length === 1" ng-click="vm.deleteUser(user)" class="md-raised md-primary">删除
+                <md-tooltip md-direction="right">删除后不可恢复</md-tooltip>
+              </md-button>
+            </td>
+         </tr>
+     </tbody>
+  </table>
+  <div class="add-admin">
+    <div ng-if="vm.editing">
+      <md-content layout-gt-sm="row" layout-padding>
+        <div>
+          <md-input-container>
+            <label>姓名</label>
+            <input type="text" required ng-model="vm.admin.name">
+          </md-input-container>
+        </div>
+      </md-content>
+      <md-content layout-gt-sm="row" layout-padding>
+        <div>
+          <md-input-container>
+            <label>账号</label>
+            <input type="text" ng-disabled="vm.admin._id" required ng-model="vm.admin.account">
+          </md-input-container>
+        </div>
+        <div>
+          <md-input-container>
+            <label>密码</label>
+            <input type="password" ng-disabled="vm.admin._id" required ng-model="vm.admin.password">
+          </md-input-container>
+        </div>
+      </md-content>
+    </div>
+    <md-button ng-if="vm.editing" ng-disabled="!vm.canSave()" class="md-raised md-primary" ng-click="vm.saveAdmin()">{{vm.admin._id ? '更新': '保存'}}
+    </md-button>
+    <md-button ng-click="vm.addOrCancel()" class="md-raised md-primary">{{vm.editing? '取消': '新增管理员'}}
+    </md-button>
+  </div>
+</div>

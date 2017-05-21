@@ -1,0 +1,41 @@
+<div class="admin-analysis" ng-if="!vm.loading">
+    <div class="people-raise common-wrap">
+        <canvas id="line1" class="chart chart-line" 
+            chart-data="vm.people_raise.data"
+            chart-labels="vm.people_raise.labels" 
+            chart-series="vm.people_raise.series" 
+            chart-options="vm.people_raise.options"
+            chart-dataset-override="vm.datasetOverride">
+        </canvas>
+        <div class="title">注册用户增长图(位)</div>
+    </div>
+    <div class="income-raise common-wrap">
+        <canvas id="line2" class="chart chart-line" 
+            chart-data="vm.income_raise.data"
+            chart-labels="vm.income_raise.labels" 
+            chart-series="vm.income_raise.series" 
+            chart-options="vm.income_raise.options"
+            chart-dataset-override="vm.datasetOverride">
+        </canvas>
+        <div class="title">营业额(元)</div>
+    </div>
+
+    <div class="order-raise common-wrap">
+        <canvas id="line3" class="chart chart-line" 
+            chart-data="vm.order_raise.data"
+            chart-labels="vm.order_raise.labels" 
+            chart-series="vm.order_raise.series" 
+            chart-options="vm.order_raise.options"
+            chart-dataset-override="vm.datasetOverride">
+        </canvas>
+        <div class="title">订单数(元)</div>
+    </div>
+
+    <div class="order-cover common-wrap head-cover">
+        <canvas id="pie2" class="chart chart-pie"
+            chart-data="vm.order_cover.data" chart-labels="vm.order_cover.labels" chart-options="vm.options">
+        </canvas> 
+        <div class="title">订单状态比例图(条)</div>
+    </div>
+    
+</div>

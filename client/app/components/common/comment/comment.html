@@ -1,0 +1,27 @@
+<div class="comments">
+    <md-input-container style="margin: 0" class="md-block">
+        <label>评论</label>
+        <textarea ng-disabled="vm.AuthService.user.type!=='user'" ng-model="vm.commentBody" md-maxlength="100" rows="5" md-select-on-focus></textarea>
+    </md-input-container>
+    <md-button class="md-raised md-primary"  ng-disabled="vm.AuthService.user.type!=='user' || !vm.commentBody.length" ng-click="vm.comment()">评论</md-button>
+    <div style="padding:10px" ng-if="vm.comments.length === 0">暂无评论</div>
+    <div class="comment" ng-repeat="comment in vm.comments">
+      <div class="user_info">
+        <img class="avatar" ng-src="{{comment.user.avatar}}">
+        <md-tooltip md-direction="left">{{comment.user.name}}</md-tooltip>
+      </div>
+      <div class="comment-body">
+        {{comment.comment_body}}
+        <span class="create_at"> {{comment.create_at | dateFilter}}</span>
+        <div class="reply-comment" ng-if="comment.reply.user_id">
+          <div class="reply-user">
+            <img class="avatar" ng-src="{{comment.reply.avatar || './assets/img/admin.png'}}">
+            <md-tooltip md-direction="left">{{comment.reply.name}}</md-tooltip>
+          </div>
+          <div class="reply-body">
+            {{comment.reply.comment_body}}
+            <span class="update_at"> {{comment.reply.create_at | dateFilter}}</span>
+          </div>
+      </div>
+    </div>
+  </div>

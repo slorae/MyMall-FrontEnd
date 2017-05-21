@@ -1,0 +1,42 @@
+<div class="nav-header">
+  <div class="lock-size" layout="row" layout-align="left top">
+    <md-fab-speed-dial md-open="vm.options.isOpen" md-direction="{{vm.options.direction}}"
+                        ng-class="vm.options.mode">
+      <md-fab-trigger ng-if ="vm.user.type !=='admin'">
+        <md-button aria-label="menu" class="md-fab md-warn">
+          <img ng-if="vm.isLogin" class="avator" ng-src="{{vm.user.avatar || './assets/img/user.png'}}" alt="{{vm.user.name}}">
+          <span ng-if ="!vm.isLogin" ng-click="vm.goToLogin()">未登录</span>
+        </md-button>
+      </md-fab-trigger>
+      <md-fab-trigger ng-if ="vm.isLogin && vm.user.type ==='admin'">
+        <md-button aria-label="menu" class="md-fab md-warn">
+          <md-icon md-svg-src="assets/svg/menu.svg" aria-label="user"></md-icon>
+          <md-tooltip  md-direction="bottom">管理员: {{ vm.user.name || '匿名'}}</md-tooltip>
+        </md-button>
+      </md-fab-trigger>
+
+      <md-fab-actions ng-if ="vm.user.type ==='user'">
+        <md-button ng-if="vm.isLogin" aria-label="home" class="md-fab md-raised md-mini">
+          <md-icon md-svg-src="assets/svg/home.svg" aria-label="user" ui-sref="app.recommend({cloth_id: 'recommend'})"></md-icon>
+        </md-button>
+        <md-button ng-if="vm.isLogin" aria-label="home" class="md-fab md-raised md-mini">
+          <md-icon md-svg-src="assets/svg/library.svg" aria-label="user" ui-sref="app.store({kind: 'all'})"></md-icon>
+        </md-button>
+        <md-button ng-if="vm.isLogin" aria-label="cart" class="md-fab md-raised md-mini" ui-sref="app.cart">
+          <md-icon md-svg-src="assets/svg/cart.svg" aria-label="stats"></md-icon>
+        </md-button>
+        <md-button ng-if="vm.isLogin" aria-label="user" class="md-fab md-raised md-mini">
+          <md-icon md-svg-src="assets/svg/user.svg" aria-label="user" ui-sref="app.user({ pageName: 'basic'})"></md-icon>
+        </md-button>
+      </md-fab-actions>
+      <md-fab-actions ng-if ="vm.isLogin && vm.user.type ==='admin'">
+        <md-button ng-if="vm.isLogin" aria-label="home" class="md-fab md-raised md-mini">
+          <md-icon md-svg-src="assets/svg/home.svg" aria-label="user" ui-sref="app.dashboard"></md-icon>
+        </md-button>
+        <md-button style="color:#FFF" ng-click="vm.adminLogout()" ng-if="vm.isLogin" aria-label="recommend" class="md-fab md-raised md-mini">
+          登出
+        </md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>
+  </div>
+</div>

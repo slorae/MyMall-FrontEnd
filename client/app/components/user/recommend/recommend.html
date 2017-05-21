@@ -1,0 +1,39 @@
+<div class="recommend">
+  <div class="content" ng-if ="!vm.loading && vm.cloth">
+    <div class="body">
+      <img ng-src="{{vm.cloth.cloth_cover}}" alt="">
+    </div>
+    <div class="footer">
+      <div class="action price">
+        {{vm.cloth.price}} 元
+      </div>
+      <div class="action">
+        <md-button class="md-icon-button" aria-label="thumb" ng-click="vm.thumb('up')">
+          <md-tooltip  md-direction="bottom">{{vm.cloth.thumb_up}}</md-tooltip>
+          <md-icon md-svg-icon="assets/svg/thumb-up.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="thumb" ng-click="vm.thumb('down')">
+          <md-tooltip md-direction="bottom">{{vm.cloth.thumb_down}}</md-tooltip>
+          <md-icon md-svg-icon="assets/svg/thumb-down.svg"></md-icon>
+        </md-button>
+      </div>
+      <div class="action more">
+        <md-button class="md-icon-button" aria-label="cart" ng-dasabled="vm.adding" ng-click="vm.addToCart()">
+          <md-icon md-svg-icon="assets/svg/cart.svg"></md-icon>
+        </md-button>
+      </div>
+      <div class="action buy">
+        <md-button class="md-icon-button" aria-label="fullscreen" ng-click="vm.moreDetail()">
+          <md-icon md-svg-icon="assets/svg/fullscreen-alt.svg"></md-icon>
+        </md-button>
+      </div>
+    </div>
+  </div>
+  <div class="loading" ng-if ="vm.loading">
+    <loading></loading>
+  </div>
+  <div class="recommend-empty" ng-if ="!vm.loading && !vm.cloth">
+    暂无适合您的推荐哦, <a ui-sref="app.store">前去选书</a>
+  </div>
+  <comment cloth="vm.cloth" ng-if="vm.cloth"></comment>
+</div>

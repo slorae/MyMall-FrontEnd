@@ -1,0 +1,17 @@
+.order-detail-wrap{
+    padding: 20px;
+    .block-line{
+        height: 20px;
+        width: 100%;
+    }
+    md-list-item{
+      border: 1px solid #e4e7ed;
+      border-radius: 3px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      .price{
+        display: inline-block;
+        padding-right: 40px;
+      }
+    }
+}

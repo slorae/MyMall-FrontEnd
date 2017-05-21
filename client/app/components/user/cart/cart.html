@@ -1,0 +1,35 @@
+<div class="cart">
+
+  <div class="addresses-list" ng-if="vm.cloths.length > 0">
+    <div ng-repeat="address in vm.addresses" class="address" ng-class="{selected: address.selected}" ng-click="vm.selectAddress(address)">
+      <span ng-if="address.is_default">默认地址</span>
+      <div>{{address.contact_name}}</div>
+      <div>{{address.phone}}</div>
+      <div class="detail">{{address.detail}}</div>
+    </div>
+    <div class="add-address">
+      <a ui-sref="app.user({ pageName: 'address'})" ng-if="vm.cloths.length < 4"> 添加新地址</a>
+    </div>
+  </div>
+
+  <div class="cart-list" ng-if="vm.cloths.length > 0">
+    <md-list>
+      <md-list-item ng-class="{active: cloth.selected}" ng-repeat="cloth in vm.cloths" >
+        <img ng-click="vm.goToCloth(cloth)" alt="{{cloth.name}}" ng-src="{{cloth.cloth_cover}}" class="md-avatar" />
+        <p>{{cloth.name}}</p>
+        <span class="price">{{cloth.price}} 元</span>
+        <md-checkbox class="md-secondary" ng-model="cloth.selected" ng-click="vm.changeItem(cloth)"></md-checkbox>
+        <md-icon md-svg-icon="assets/svg/cancel.svg"  ng-click="vm.removeCloth(cloth._id)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
+      </md-list-item>
+    </md-list>
+  </div>
+
+  <div class="action-group" ng-if="vm.cloths.length > 0">
+    <span>总价: {{vm.allPrice}} 元</span>
+    <md-button ng-disabled="vm.canNotPay() || vm.paying"  ng-click="vm.creatOrder()" class="md-raised md-primary">{{vm.paying ? '正在下单...' : '下单并付款'}}
+      <md-tooltip md-direction="bottom">暂时仅支持微信支付</md-tooltip>
+    </md-button>
+  </div>
+
+  <div class="cart-empty" ng-if="vm.cloths.length === 0">购物车为空哦 , <a ui-sref="app.store({kind: 'all'})">前去选书</a></div>
+</div>

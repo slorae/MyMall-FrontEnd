@@ -1,0 +1,67 @@
+.store {
+  color: rgba(0, 0, 0, 0.7);
+  padding-bottom: 120px;
+  background-color: #f6f6f6;
+  .search{
+    height: 80px;
+    width: 100%;
+    margin-top: -90px;
+    text-align: center;
+    md-autocomplete{
+      width: 360px;
+      margin: 40px auto;
+    }
+  }
+  .loading{
+    margin-top: 150px;
+  }
+  .content{
+    .placeholder{
+      width: 100%;
+      margin: 8px;
+    }
+    width: 90%;
+    margin: 0 auto;
+    margin-top: -30px;
+    .kind-show{
+      padding-left: 8px;
+      button{
+        margin-top: 3px;
+      }
+    }
+    .card-media {
+      background-color: #999999; 
+      height: 180px;
+      cursor: pointer;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    md-card{
+      width: 378px;
+      float: left;
+      .md-headline{
+        font-size: 18px;
+        cursor: pointer;
+        padding-left: 8px;
+      }
+      .md-subhead{
+        padding-left: 10px;
+        max-height: 95px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  #choose-kind-area{
+    background-color: #FFF;
+    .radio-area{
+        padding-left: 30px;
+        padding-top: 30px;
+        md-radio-button{
+          outline: none;
+        }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+<div class="admin-comments">
+  <h3>评论管理</h3>
+  <table class="global-table admin-comments-table">
+    <thead>
+         <tr>
+            <th>服装名</th>
+            <th>会员姓名</th>
+            <th>回复内容</th>
+            <th>创建时间</th>
+            <th>管理员姓名</th>
+            <th>管理员回复内容</th>
+            <th>管理员回复时间</th>
+            <th>操作</th>
+         </tr> 
+     </thead>
+     <tbody>
+         <tr ng-repeat="comment in vm.data.comments">
+            <td>{{comment.cloth_name}}</td>
+            <td>{{comment.user.name}}</td>
+            <td>{{comment.comment_body}}</td>
+            <td>{{comment.create_at | dateFilter}}</td>
+            <td>{{comment.reply.name || '未回复'}}</td>
+            <td>{{comment.reply.comment_body || '未回复'}}</td>
+            <td>{{comment.reply.create_at | dateFilter}}</td>
+             <td>
+              <md-menu md-offset="0 -5">
+                <md-button ng-click="vm.openMenu($mdMenu, $event)" class="md-raised md-primary">操作
+                </md-button>
+                <md-menu-content width="3">
+                  <md-menu-item>
+                    <md-button ng-click="vm.replyComment($event, comment)" >回复评论</md-button>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <md-button ng-click="vm.deleteComment(comment)">删除评论</md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </td>
+         </tr>
+     </tbody>
+  </table>
+  <div class="placeholder" ng-if="vm.data.comments.length === 0">
+    暂无数据
+  </div>
+  <div class="count-number" ng-if="vm.data.comments.length">
+    总共 {{ vm.data.paginate.total_counts}} 条数据
+  </div>
+  <div class="pagination-container" ng-if="vm.data.paginate.total_counts > vm.data.paginate.per_page">
+    <div class="pagination">
+        <ul>
+          <a ng-click="vm.changePage(vm.data.paginate.page  - 1)"><li><</li></a>
+          <a ng-repeat="num in vm.nums" ng-click="vm.changePage(num)" ng-class = "{'is-active': vm.data.paginate.page === num }"><li>{{num + 1}}</li></a>
+          <a ng-click="vm.changePage(vm.data.paginate.page + 1)"><li>></li></a>
+        </ul>
+    </div>
+  </div>
+</div>

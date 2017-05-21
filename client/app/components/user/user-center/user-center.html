@@ -1,0 +1,229 @@
+<div class="user-center">
+  <div class="basic">
+    <div class="avatar-container">
+      <img style="outline: none" ng-src="{{vm.user.avatar || './assets/img/user.png'}}" ng-click="vm.choose()" alt="头像">
+      <md-tooltip md-direction="right">点击上传头像</md-tooltip>
+    </div>
+    <div class="info">
+      <p class="name">{{vm.user.name || '未设置雅号'}}</p>
+    </div>
+    <form style="opacity: 0;" id="avatar-form" method="post" enctype="multipart/form-data">
+        <input id="avatar-input" type="file" name="image">
+        <input id="avatar-submit" type="submit">
+    </form>
+  </div>
+  <div class="detail">
+    <div ng-cloak>
+      <md-content>
+        <md-tabs md-dynamic-height md-border-bottom  md-selected="vm.pageIndex" ng-click="vm.changeTab()">
+          <md-tab label="基本信息">
+            <md-content class="md-padding">
+              <div layout="column" ng-cloak class="md-inline-form">
+                <md-content layout-gt-sm="row" layout-padding>
+                  <md-input-container>
+                    <label>账号</label>
+                    <input type="text" disabled ng-model="vm.user.account">
+                  </md-input-container>
+                </md-content>
+                <md-content layout-gt-sm="row" layout-padding>
+                  <md-input-container>
+                    <label>昵称</label>
+                    <input type="text" required ng-model="vm.user.name">
+                  </md-input-container>
+                </md-content>
+              </div>
+            </md-content>
+             <div class="action-buttons">
+               <md-button class="md-raised md-primary" ng-disabled="!vm.user.name || vm.user.name.length<2" ng-click="vm.saveBasic()">保存</md-button>
+               <md-button  class="md-raised md-warn" ng-click="vm.logOut()">退出登录</md-button>
+             </div>
+          </md-tab>
+          <md-tab label="账户资金">
+            <md-content class="md-padding">
+              <div layout="column" ng-cloak class="md-inline-form changePassword">
+                <md-content layout-gt-sm="row" layout-padding>
+                  <md-input-container>
+                    <label>账户余额</label>
+                    <input type="number" disabled ng-model="vm.user.balance">
+                  </md-input-container> 
+                </md-content>
+                <md-content layout-gt-sm="row" layout-padding>
+                  <md-input-container>
+                    <label>充值金额</label>
+                    <input type="number" ng-model="vm.charge_number">
+                  </md-input-container> 
+                </md-content>
+              </div>
+            </md-content>
+             <div class="action-buttons">
+               <md-button class="md-raised md-primary" ng-disabled="!vm.charge_number || vm.charge_number < 1" 
+               ng-click="vm.chargeBalance()">确认充值</md-button>
+             </div>
+          </md-tab>
+          <md-tab label="修改密码">
+            <md-content class="md-padding">
+              <div layout="column" ng-cloak class="md-inline-form changePassword">
+                <md-content layout-gt-sm="row" layout-padding>
+                  <md-input-container>
+                    <label>旧登录密码</label>
+                    <input type="password" ng-model="vm.password.old_password">
+                  </md-input-container> 
+                </md-content>
+                <md-content layout-gt-sm="row" layout-padding>
+                  <md-input-container>
+                    <label>新登录密码</label>
+                    <input type="password" ng-model="vm.password.new_password">
+                  </md-input-container> 
+                  <md-input-container>
+                    <label>确认登录密码</label>
+                    <input type="password" ng-model="vm.password.check_password">
+                  </md-input-container>
+                </md-content>
+              </div>
+            </md-content>
+             <div class="action-buttons">
+               <md-button class="md-raised md-primary" 
+               ng-disabled="!vm.password.old_password 
+                          ||!vm.password.new_password
+                          || vm.password.new_password.length<6
+                          || vm.password.new_password!==vm.password.check_password" 
+               ng-click="vm.changePassword()">确认修改</md-button>
+             </div>
+          </md-tab>
+          <md-tab label="收货地址">
+            <md-content class="md-padding">
+              <div class="addresses-list">
+                <div ng-repeat="address in vm.addresses" class="address" ng-class="{selected: address.is_default}" ng-dblclick="vm.editAddress(address)" ng-click="vm.selectAddress(address)">
+                  <span ng-if="address.is_default">默认地址</span>
+                  <div>{{address.contact_name}}</div>
+                  <div>{{address.phone}}</div>
+                  <div class="detail">{{address.detail}}</div>
+                </div>
+                <div class="add-address">
+                  <a ng-if="vm.addresses.length < 4 && !vm.adding" ng-click="vm.adding = !vm.adding"> 添加新地址</a>
+                  <div ng-if="vm.adding">
+                    <md-input-container>
+                      <label>收件人</label>
+                      <input type="text" required ng-model="vm.address.contact_name">
+                    </md-input-container>
+                    <md-input-container>
+                      <label>电话</label>
+                      <input type="text" required ng-model="vm.address.phone">
+                    </md-input-container>
+                    <md-input-container style="width:100%">
+                      <label>地址</label>
+                      <input type="text" required ng-model="vm.address.detail">
+                    </md-input-container>
+                  </div>
+                </div>
+              </div>
+            </md-content>
+            <div class="action-buttons">
+              <md-button ng-if="vm.adding" class="md-raised md-primary" ng-click="vm.saveAddress()">保存</md-button>
+              <md-button ng-if="vm.adding" class="md-raised md-primary" ng-click="vm.cancelAddress()">取消</md-button>
+            </div>
+          </md-tab>
+          <md-tab label="订单管理">
+            <md-content class="md-padding">
+              <div layout="column" flex layout-fill ng-cloak class="order-list">
+                <md-content style="height: 600px;">
+                  <section>
+                    <md-subheader class="md-primary">未付款</md-subheader>
+                    <md-list layout-padding>
+                      <md-list-item class="md-3-line" ng-repeat="order in vm.unpayOrders">
+                        <img ng-src="{{order.cloths[0].cloth_cover}}" class="md-avatar" ng-click="vm.orderDetail(order)">
+                        <div class="md-list-item-text">
+                          <div class="order-detail">
+                            <md-tooltip md-direction="top">共 {{order.cloths.length}} 本书</span></md-tooltip>
+                            <span class="order-cloth-name"  ng-click="vm.orderDetail(order)">{{order.cloths[0].name}}{{order.cloths.length > 1 ? '...' : ''}}</span>
+                            <span class="order-price">{{order.pay_num}}元</span>
+                            <span> <md-button class="md-mini md-primary" 
+                               ng-click="vm.payOrder(order)">付款</md-button></span>
+                            <div class="order-address"  ng-click="vm.orderDetail(order)">{{order.address.detail}}&nbsp;&nbsp;{{order.address.phone}}</div>
+                          </div>
+                          <span class="order-time">{{ order.create_at | dateFilter }}</span>
+                        </div>
+                      </md-list-item>
+                    </md-list>
+                  </section>
+                  <section>
+                    <md-subheader class="md-primary">未发货</md-subheader>
+                    <md-list layout-padding>
+                      <md-list-item class="md-3-line" ng-repeat="order in vm.unsendOrders" >
+                        <img ng-src="{{order.cloths[0].cloth_cover}}" class="md-avatar" ng-click="vm.orderDetail(order)">
+                        <div class="md-list-item-text">
+                          <div class="order-detail">
+                            <md-tooltip md-direction="top">共 {{order.cloths.length}} 本书</span></md-tooltip>
+                            <span class="order-cloth-name" ng-click="vm.orderDetail(order)">{{order.cloths[0].name}}{{order.cloths.length > 1 ? '...' : ''}}</span>
+                            <span class="order-price">{{order.pay_num}}元</span>
+                            <span> <md-button class="md-mini md-primary" 
+                               ng-click="vm.cancelOrder(order)">取消</md-button></span>
+                            <div class="order-address" ng-click="vm.orderDetail(order)">{{order.address.detail}}&nbsp;&nbsp;{{order.address.phone}}</div>
+                          </div>
+                          <span class="order-time">{{ order.create_at | dateFilter }}</span>
+                        </div>
+                      </md-list-item>
+                    </md-list>
+                  </section>
+                  <section>
+                    <md-subheader class="md-primary">已发货</md-subheader>
+                    <md-list layout-padding>
+                      <md-list-item class="md-3-line" ng-repeat="order in vm.unassignOrders" ng-click="vm.orderDetail(order)">
+                        <img ng-src="{{order.cloths[0].cloth_cover}}" class="md-avatar" ng-click="vm.orderDetail(order)">
+                        <div class="md-list-item-text" ng-click="vm.orderDetail(order)">
+                          <div class="order-detail">
+                            <md-tooltip md-direction="top">共 {{order.cloths.length}} 本书</span></md-tooltip>
+                            <span class="order-cloth-name">{{order.cloths[0].name}}{{order.cloths.length > 1 ? '...' : ''}}</span>
+                            <span class="order-price">{{order.pay_num}}元</span>
+                            <div class="order-address">{{order.address.detail}}&nbsp;&nbsp;{{order.address.phone}}</div>
+                          </div>
+                          <span class="order-time">{{ order.create_at | dateFilter }}</span>
+                        </div>
+                      </md-list-item>
+                    </md-list>
+                  </section>
+
+                  <section>
+                    <md-subheader class="md-warn">已签收</md-subheader>
+                    <md-list layout="column" layout-padding>
+                      <md-list-item class="md-3-line" ng-repeat="order in vm.assignOrders" ng-click="vm.orderDetail(order)">
+                        <img ng-src="{{order.cloths[0].cloth_cover}}" class="md-avatar" ng-click="vm.orderDetail(order)">
+                        <div class="md-list-item-text" ng-click="vm.orderDetail(order)">
+                          <div class="order-detail">
+                            <md-tooltip md-direction="top">共 {{order.cloths.length}} 本书</span></md-tooltip>
+                            <span class="order-cloth-name">{{order.cloths[0].name}}{{order.cloths.length > 1 ? '...' : ''}}</span>
+                            <span class="order-price">{{order.pay_num}}元</span>
+                            <div class="order-address">{{order.address.detail}}&nbsp;&nbsp;{{order.address.phone}}</div>
+                          </div>
+                          <span class="order-time">{{ order.create_at | dateFilter }}</span>
+                        </div>
+                      </md-list-item>
+                    </md-list>
+                  </section>
+
+                  <section>
+                    <md-subheader class="md-warn">已取消</md-subheader>
+                    <md-list layout="column" layout-padding>
+                      <md-list-item class="md-3-line" ng-repeat="order in vm.cancelOrders" ng-click="vm.orderDetail(order)">
+                        <img ng-src="{{order.cloths[0].cloth_cover}}" class="md-avatar" ng-click="vm.orderDetail(order)">
+                        <div class="md-list-item-text" ng-click="vm.orderDetail(order)">
+                          <div class="order-detail">
+                            <md-tooltip md-direction="top">共 {{order.cloths.length}} 本书</span></md-tooltip>
+                            <span class="order-cloth-name">{{order.cloths[0].name}}{{order.cloths.length > 1 ? '...' : ''}}</span>
+                            <span class="order-price">{{order.pay_num}}元</span>
+                            <div class="order-address">{{order.address.detail}}&nbsp;&nbsp;{{order.address.phone}}</div>
+                          </div>
+                          <span class="order-time">{{ order.create_at | dateFilter }}</span>
+                        </div>
+                      </md-list-item>
+                    </md-list>
+                  </section>
+                </md-content>
+              </div>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-content>
+    </div>
+  </div>
+</div>

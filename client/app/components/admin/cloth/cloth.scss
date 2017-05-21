@@ -1,0 +1,25 @@
+.admin-cloth{
+  width: 80%;
+  margin: 0 auto;
+  md-card{
+    position: relative;
+    .cover{
+        border: 1px solid #BDBDBD;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 300px;
+        height: 380px;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .cloth-action-button{
+        width: 20%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+  }
+}

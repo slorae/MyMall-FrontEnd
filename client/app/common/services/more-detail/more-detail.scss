@@ -1,0 +1,22 @@
+.more-detail{
+    md-dialog-content{
+        min-width: 800px;
+        position: relative;
+        .detail-left{
+            width: calc(100% - 300px);
+            min-height: 440px;
+        }
+        .detail-right{
+            position: absolute;
+            top: 10px;
+            right: 0;
+            width: 300px;
+            img{
+                width: 100%;
+            }
+            .right-detail{
+                padding: 20px;
+            }
+        }
+    }
+}

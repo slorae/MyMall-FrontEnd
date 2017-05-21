@@ -1,0 +1,10 @@
+// 第三方库
+import 'angular';
+import 'angular-messages';
+import 'angular-aria';
+import 'angular-animate';
+import 'angular-material';
+import 'bootstrap-css-only';
+import 'chart.js';
+import 'angular-chart.js';
+import 'normalize.css';

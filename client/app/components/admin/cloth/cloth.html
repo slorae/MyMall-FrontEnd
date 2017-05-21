@@ -1,0 +1,61 @@
+<div class="admin-cloth">
+    <md-card>
+        <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{vm.cloth._id ? '编辑服装' : '新增服装'}} ({{vm.cloth.state| translateToCH}})</span>
+        </md-card-title-text>
+        </md-card-title>
+        <form name="cloth">
+            <md-card-content>
+                <div layout="row">
+                    <md-input-container>
+                        <label>服装名</label>
+                        <input required ng-model="vm.cloth.name">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>品牌</label>
+                        <input required ng-model="vm.cloth.brand">
+                    </md-input-container>
+                    <md-input-container ng-if="vm.kinds.length">
+                        <label>类别</label>
+                        <md-select required ng-model="vm.cloth.kind">
+                            <md-option ng-repeat="kind in vm.kinds" ng-value="kind">
+                                {{kind}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-input-container>
+                        <label>库存总数</label>
+                        <input required type="number" step="any" ng-model="vm.cloth.total" min="1" max="4999">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>价格</label>
+                        <input required type="number" step="any" ng-model="vm.cloth.price" min="1" max="4999">
+                    </md-input-container>
+                </div>
+                <div layout="row" class="md-block">
+                    <md-input-container class="md-block" style="width: 50%;">
+                        <label>基本描述</label>
+                        <textarea required ng-model="vm.cloth.title" md-maxlength="100" rows="5" md-select-on-focus></textarea>
+                    </md-input-container>
+                </div>
+
+                <div layout="row" class="md-block">
+                    <div simditor ng-model="vm.cloth.description"></div>
+                </div>
+            </md-card-content>
+        </form>
+        <div class="cover" >
+            <img ng-click="vm.choose()" style="outline: none" ng-src="{{vm.cloth.cloth_cover || './assets/img/upload.png'}}">
+            <form name="upload" style="opacity: 0;" id="cloth-cover-form" method="post" enctype="multipart/form-data">
+                <input id="cloth-cover-input" type="file" name="image">
+                <input id="cloth-cover-submit" type="submit">
+            </form>
+            <md-tooltip md-direction="left">点击上传图片</md-tooltip>
+        </div>
+        <md-button ng-disabled="cloth.$invalid" ng-click="vm.saveCloth()" class="md-raised md-primary cloth-action-button">{{vm.cloth._id ? '更新' : '保存'}}
+        </md-button>
+    </md-card>
+</div>

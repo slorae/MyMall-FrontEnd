@@ -1,0 +1,78 @@
+<div class="admin-cloths">
+  <h3>服装管理</h3>
+  <table class="global-table admin-cloths-table">
+    <thead>
+         <tr>
+            <th>封面图片</th>
+            <th>服装名</th>
+            <th>价格</th>
+            <th>总数</th>
+            <th>剩余</th>
+            <th>类别</th>
+            <th>创建时间</th>
+            <th>更新时间</th>
+            <th>状态</th>
+            <th>操作</th>
+         </tr> 
+     </thead>
+     <tbody>
+         <tr ng-repeat="cloth in vm.data.cloths">
+            <td><img ui-sref="app.admin.cloth({cloth_id: cloth._id})" ng-src="{{cloth.cloth_cover}}" class="md-avatar"></td>
+            <td>{{cloth.name}}</td>
+            <td>{{cloth.price}}</td>
+            <td>{{cloth.total}}</td>
+            <td>{{cloth.left}}</td>
+            <td>{{cloth.kind}}</td>
+            <td>{{cloth.create_at | dateFilter}}</td>
+            <td>{{cloth.update_at | dateFilter}}</td>
+            <td>{{cloth.state | translateToCH}}</td>            
+            <td>
+              <md-menu md-offset="0 -5">
+                <md-button ng-click="vm.openMenu($mdMenu, $event)" class="md-raised md-primary">操作
+                  <md-tooltip md-direction="right">点击展开</md-tooltip>
+                </md-button>
+                <md-menu-content width="3">
+                  <md-menu-item>
+                    <md-button ng-click="vm.clothDetail(cloth)">查看详情</md-button>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <md-button ui-sref="app.admin.comments({cloth_id: cloth._id})">查看评论</md-button>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <md-button ui-sref="app.admin.cloth({cloth_id: cloth._id})">编辑服装</md-button>
+                  </md-menu-item>
+                  <md-menu-item ng-if="cloth.state !== 'online' && cloth.state !== 'recommend'">
+                    <md-button ng-click="vm.changeClothState(cloth, 'online')">设置为已上架</md-button>
+                  </md-menu-item>
+                  <md-menu-item ng-if="cloth.state === 'online'">
+                    <md-button ng-click="vm.changeClothState(cloth, 'offline')">设置为已下架</md-button>
+                  </md-menu-item>
+                  <md-menu-item ng-if="cloth.state === 'online'">
+                    <md-button ng-click="vm.changeClothState(cloth, 'recommend')">设置为推荐服装</md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </td>
+         </tr>
+     </tbody>
+  </table>
+  <div class="placeholder" ng-if="vm.data.cloths.length === 0">
+    暂无服装
+  </div>
+  <div class="count-number" ng-if="vm.data.cloths.length">
+    总共 {{ vm.data.paginate.total_counts}} 条数据
+  </div>
+  <div class="add-cloth">
+    <md-button ui-sref="app.admin.cloth({cloth_id: 'new'})" class="md-raised md-primary">新增服装
+    </md-button>
+  </div>
+  <div class="pagination-container" ng-if="vm.data.paginate.total_counts > vm.data.paginate.per_page">
+    <div class="pagination">
+        <ul>
+          <a ng-click="vm.changePage(vm.data.paginate.page  - 1)"><li><</li></a>
+          <a ng-repeat="num in vm.nums" ng-click="vm.changePage(num)" ng-class = "{'is-active': vm.data.paginate.page === num }"><li>{{num + 1}}</li></a>
+          <a ng-click="vm.changePage(vm.data.paginate.page + 1)"><li>></li></a>
+        </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.dashboard{
+  // padding: 80px;
+  margin: 0 auto;
+  min-width: 90%;
+  text-align: left;
+  .dashboard-wrap {
+    padding-left: 100px;
+    padding-top: 50px;
+    .item{
+      text-align: center;
+      padding: 20px 50px;
+      & > div {
+        background-color: #E0D3BF;
+        color: #FFF;
+        border-radius: 4px;
+        padding: 20px;
+        cursor: pointer;
+        font-size: 22px;
+        &:hover{
+         box-shadow: 1px 2px 2px rgba(0,0,0,0.3);
+        }
+        svg{
+          fill:#FFF;
+        }
+      }
+      height: 150px;
+      width: 23%;
+      display: inline-block;
+    }
+  }
+}

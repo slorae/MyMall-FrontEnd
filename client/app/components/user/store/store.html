@@ -1,0 +1,61 @@
+<div class="store">
+  <div class="search">
+    <md-autocomplete
+          md-selected-item="vm.selectedItem"
+          md-search-text="vm.keyword"
+          md-search-text-change="vm.keywordChange(vm.keyword)"
+          md-selected-item-change="vm.selectedItemChange(item)"
+          md-items="item in vm.querySearch(vm.keyword)"
+          md-item-text="item.name"
+          md-min-length="0"
+          placeholder="您想要买什么衣服? ">
+        <md-item-template>
+          <span md-highlight-text="vm.keyword" md-highlight-flags="^i">{{item.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          没找到 "{{vm.keyword}}" ?
+          <!-- <a ng-click="vm.tellAdmin(vm.keyword)">告诉管理员</a> -->
+        </md-not-found>
+      </md-autocomplete>
+  </div>
+  <div class="content" ng-if ="!vm.loading">
+     <md-content class="md-padding">
+      <div class="kind-show">当前分类: {{ vm.getKindName() || '全部服装' }}
+        <md-button ng-click="vm.toggleRight()" class="md-primary">选择分类</md-button>
+      </div>
+      <div >
+        <div class="placeholder" ng-if="!vm.cloths.length">
+          没有<span ng-if="vm.keyword.length">搜索到关于 "<strong>{{vm.keyword}}</strong>" 的</span>服装</div>
+        <md-card ng-repeat="cloth in vm.cloths" md-theme="'default'" md-theme-watch>
+          <md-card-title>
+            <md-card-title-media>
+              <div class="md-media-lg card-media" ui-sref="app.recommend({cloth_id: cloth._id})">
+                <img ng-src="{{cloth.cloth_cover}}">
+              </div>
+            </md-card-title-media>
+            <md-card-title-text>
+              <span class="md-headline" ui-sref="app.recommend({cloth_id: cloth._id})">{{cloth.name}}</span>
+              <span class="md-subhead">{{cloth.title}}</span>
+            </md-card-title-text>
+          </md-card-title>
+        </md-card>
+      </div>
+    </md-content>
+  </div>
+  <div class="loading" ng-if ="vm.loading">
+    <loading></loading>
+  </div>
+   <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="right">
+      <md-toolbar class="md-theme-left">
+        <h1 class="md-toolbar-tools">选择服装分类</h1>
+      </md-toolbar>
+      <md-content  layout-padding id="choose-kind-area">
+        <div class="radio-area">
+          <md-radio-group ng-model="vm.kind_id">
+            <md-radio-button ng-click="vm.chooseKind('all')" value="'all'" class="md-primary">全部服装</md-radio-button>
+            <md-radio-button ng-if="kind.name !== '未分类'" ng-click="vm.chooseKind(kind._id)" ng-repeat="kind in vm.kinds" value="{{kind._id}}" class="md-primary">{{kind.name}}</md-radio-button>
+          </md-radio-group>
+        </div>
+      </md-content>
+    </md-sidenav>
+</div>

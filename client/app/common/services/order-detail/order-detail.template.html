@@ -1,0 +1,52 @@
+<div class="order-detail">
+  <md-dialog aria-label="订单详情">
+    <form ng-cloak>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>订单详情</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-icon md-svg-src="assets/svg/cancel.svg" aria-label="Close dialog"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-dialog-content>
+        <div class="order-detail-wrap">
+          <div class="cloths">
+            <md-list>
+              <md-list-item ng-class="{active: cloth.selected}" ng-repeat="cloth in vm.order.cloths" >
+                <img alt="{{cloth.name}}" ng-src="{{cloth.cloth_cover}}" class="md-avatar" />
+                <p>{{cloth.name}}</p>
+                <span class="price">{{cloth.price}} 元</span>
+              </md-list-item>
+            </md-list>
+          </div>
+          <div class="order-detail">
+            <div>收货人: {{vm.order.address.contact_name}}</div>
+            <div>收货地址: {{vm.order.address.detail}}</div>
+            <div>联系电话: {{vm.order.address.phone}}</div>            
+            <div class="block-line"></div>
+            <div>创建时间: {{vm.order.create_at | dateFilter}}</div>
+            <div>订单金额: {{vm.order.pay_num}}</div>
+            <div>当前状态: 
+              <span ng-if="vm.order.state === 'unpay'">未付款</span>
+              <span ng-if="vm.order.state === 'unsend'">未发货</span>
+              <span ng-if="vm.order.state === 'unassign'">已发货, 未签收</span>
+              <span ng-if="vm.order.state === 'assign'">已签收</span>
+              <span ng-if="vm.order.state === 'cancel'">已取消</span>
+              </div>
+            
+          </div>
+        </div>
+      </md-dialog-content>
+
+     <!--  <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button class="md-raised md-primary" ng-click="vm.help()" style="margin-right:20px;" >
+          对订单有疑问
+        </md-button>
+      </md-dialog-actions> -->
+    </form>
+  </md-dialog>
+</div>

@@ -1,0 +1,43 @@
+<md-dialog aria-label="{{vm.cloth.name}}" class="more-detail">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{vm.cloth.name}}&nbsp;&nbsp;{{vm.cloth.brand}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon md-svg-src="assets/svg/cancel.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div class="detail-left">
+          <h4>{{vm.cloth.title}}</h4>
+          <div ng-bind-html="vm.description"></div>
+        </div>
+        <div class="detail-right">
+          <img ng-src="{{vm.cloth.cloth_cover}}">
+          <div class="right-detail">
+            <h4> 服装名: {{ vm.cloth.name }}</h4>
+            <h4> 品牌: {{ vm.cloth.brand }}</h4>
+            <h4> 价格: {{ vm.cloth.price }}</h4>
+            <h4> 总数: {{ vm.cloth.total }}</h4>
+            <h4> 类别: {{ vm.cloth.kind}}</h4>
+            <h4> 点赞数: {{ vm.cloth.thumb_up }}</h4>
+            <h4> 倒喝彩: {{ vm.cloth.thumb_down }}</h4>
+            <h4> 创建时间: {{ vm.cloth.create_at | dateFilter }}</h4>
+            <h4 ng-if ="vm.isAdmin"> 当前状态: {{ vm.cloth.state | translateToCH }}</h4>
+          </div>
+        </div>
+      </div>
+    </md-dialog-content>
+
+   <!--  <md-dialog-actions layout="row"  ng-if ="!vm.isAdmin">
+        <span flex></span>
+        <md-button class="md-raised md-primary" ng-click="vm.help()" style="margin-right:20px;" >
+          对服装有疑问
+        </md-button>
+      </md-dialog-actions> -->
+  </form>
+</md-dialog>

@@ -1,0 +1,29 @@
+<md-dialog aria-label="支付书款">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>支付书款</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon md-svg-src="assets/svg/cancel.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="padding: 20px;padding-left: 60px;">
+      <h4>当前账户余额: {{vm.user.balance}}</h4>
+      <h4>需支付书款: {{vm.order.pay_num}}</h4>
+      <md-input-container>
+        <label>请输入密码</label>
+        <input type="password" ng-model="vm.password">
+      </md-input-container>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button class="md-raised md-primary" 
+        ng-click="vm.pay()" style="margin-right:20px;" 
+        ng-if="vm.user.balance > vm.order.pay_num" ng-disabled="vm.loading || !vm.password.length">确认支付</md-button>
+      <md-button class="md-raised md-primary" 
+        ng-click="vm.charge()" style="margin-right:20px;" 
+        ng-if="vm.user.balance < vm.order.pay_num">余额不足, 前去充值</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

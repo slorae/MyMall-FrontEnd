@@ -1,0 +1,21 @@
+<div class="login">
+  <md-content style="background-color:#FFF" layout-padding>
+    <div class="title"><h4>{{vm.nowLogin? '登   录' : '注    册'}}</h4></div>
+    <md-input-container class="md-block">
+      <label>账号</label>
+      <input required type="text" name="account" ng-model="vm.user.account">
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>密码</label>
+      <input required type="password" name="password" ng-model="vm.user.password" minlength="4" maxlength="20">
+    </md-input-container>
+    <div ng-if="!vm.nowLogin">
+      <md-button  ng-disabled="vm.canNotSave()"  class="md-raised md-primary" ng-click="vm.register()">注册</md-button> 
+      <a class="change-model" ng-click="vm.changeModel()">已有账号</a>
+    </div>
+    <div ng-if="vm.nowLogin"> 
+      <md-button  ng-disabled="vm.canNotSave()"  class="md-raised md-primary" ng-click="vm.login()">登录</md-button> 
+      <a class="change-model" ng-click="vm.changeModel()">注册账号</a>
+    </div>
+  </md-content>
+ </div>
